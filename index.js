@@ -77,6 +77,7 @@ function createGraph(entry) {
       queue.push(child);
     });
   }
+  
   fs.writeFileSync("./output/queue.js", JSON.stringify(queue));
   return queue;
 }
@@ -117,7 +118,10 @@ function bundle(graph) {
  
   return result;
 }
- 
+
+if (!fs.existsSync("./output")) {
+    fs.mkdirSync("./output");
+}
 const graph = createGraph("./example/entry.js");
 const ret = bundle(graph);
  
